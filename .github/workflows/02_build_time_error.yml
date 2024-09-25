@@ -12,5 +12,4 @@ jobs:
     uses: ./.github/workflows/include.yml
     with:
       signing_policy: 02_build_time_error
-    secrets:
-      SIGNPATH_API_TOKEN: ${{ secrets.SIGNPATH_API_TOKEN }}
+    secrets: inherit

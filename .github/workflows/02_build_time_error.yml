@@ -1,0 +1,14 @@
+name: 02 - Build Time Error
+
+# This signing policy validates that the creation was restricted at build time. Creation was nevery restricted, so it fails.
+
+on:
+  push:
+    branches: ["main"]
+  workflow_dispatch:
+
+jobs:
+  build:
+    uses: ./.github/workflows/include.yml
+    with:
+      signing_policy: 02_build_time_error

@@ -21,3 +21,11 @@ There will be the following timeline:
 | deletion                                                | Yes      | No         | Yes          |
 | pull_request _(with 1 approver and everything on true)_ | Yes      | Incomplete | Yes          | 
 
+## Tests
+
+There are the following workflow files which call the respective signing policies for which policies have been configured:
+
+* [01_continuity_error.yml](.github/workflows/01_continuity_error.yml): This signing policy evaluates that pull requests (including all flags) and a deletion restriction have been enabled since T0. As both were not set between T1 and T2, this workflow fails.
+* [02_build_time_error.yml](.github/workflows/02_build_time_error.yml): This signing policy validates that the creation was restricted at build time. Creation was nevery restricted, so it fails.
+* [03_before_repo_creation_error.yml](.github/workflows/03_before_repo_creation_error.yml): This signing policy validates that pull_request (without flags) has been enabled since T-1 (before the repo was created). That is of course not possible and the workflow thus fails.
+* [04_success.yml](.github/workflows/04_success.yml): This signing policy validates that non_fast_forward has been restricted since T1. This is the case, so it should pass.

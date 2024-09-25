@@ -9,6 +9,36 @@ on:
 
 jobs:
   build:
-    uses: ./.github/workflows/include.yml
-    with:
-      signing_policy: 02_build_time_error
+    runs-on: ubuntu-latest
+    permissions:
+      actions: read
+      contents: read
+    env:
+      name: 03_build_time_error
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Print signing policy
+        run: echo "Running for signing policy $name"
+        shell: bash
+      - name: Download dummy executable
+        run: curl -o random.dll https://github.com/carterjones/hello-world-dll/releases/download/v1.0.0/hello-world-x64.dll
+      - name: upload-unsigned-artifact
+        id: upload-unsigned-artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: "upload-${{ env.name }}" 
+          if-no-files-found: error
+          path: random.dll
+      - name: Submit Signing Request
+        uses: signpath/github-action-submit-signing-request@v1
+        with:
+          connector-url: 'https://githubactions-qa1.connectors.dev.signpath.io:15021'
+          api-token: '${{ secrets.SIGNPATH_API_TOKEN }}'
+          organization-id: '${{ vars.SIGNPATH_ORGANIZATION_ID }}'
+          project-slug: 'GitHub_Branch_Ruleset_Tests'
+          signing-policy-slug:  '${{ env.name }}'
+          github-artifact-id:  "${{steps.upload-unsigned-artifact.outputs.artifact-id}}"
+          wait-for-completion: false

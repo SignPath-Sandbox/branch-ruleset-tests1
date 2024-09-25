@@ -14,7 +14,7 @@ jobs:
       actions: read
       contents: read
     env:
-      name: 03_build_time_error
+      name: 02_build_time_error
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -42,3 +42,4 @@ jobs:
           signing-policy-slug:  '${{ env.name }}'
           github-artifact-id:  "${{steps.upload-unsigned-artifact.outputs.artifact-id}}"
           wait-for-completion: false
+          extended-verification-token: '${{ secrets.EXTENDED_VERIFICATON_TOKEN }}'

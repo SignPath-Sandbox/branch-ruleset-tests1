@@ -13,3 +13,5 @@ jobs:
     uses: ./.github/workflows/include.yml
     with:
       signing_policy: 03_before_repo_creation_error
+    secrets:
+      SIGNPATH_API_TOKEN: ${{ secrets.SIGNPATH_API_TOKEN }}

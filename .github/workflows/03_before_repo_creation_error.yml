@@ -1,0 +1,15 @@
+name: 03 - Before repo creation error
+
+# This signing policy validates that pull_request (without flags) has been enabled since T-1 (before the repo was created).
+# That is of course not possible and the workflow thus fails.
+
+on:
+  push:
+    branches: ["main"]
+  workflow_dispatch:
+
+jobs:
+  build:
+    uses: ./.github/workflows/include.yml
+    with:
+      signing_policy: 03_before_repo_creation_error

@@ -6,6 +6,9 @@ on:
       signing_policy:
         required: true
         type: string
+    secrets:
+      SIGNPATH_API_TOKEN:
+        required: true
 jobs:
   build:
     runs-on: ubuntu-latest

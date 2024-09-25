@@ -1,0 +1,15 @@
+name: 04 - Success
+
+# This signing policy validates that non_fast_forward has been restricted since T1.
+# This is the case, so it should pass
+
+on:
+  push:
+    branches: ["main"]
+  workflow_dispatch:
+
+jobs:
+  build:
+    uses: ./.github/workflows/include.yml
+    with:
+      signing_policy: 04_success

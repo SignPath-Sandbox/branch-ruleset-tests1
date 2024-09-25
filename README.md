@@ -11,7 +11,7 @@ There will be the following timeline:
 
 * **T0:** 2024-09-24 19:58 UTC: The repository level ruleset is created
 * **T1:** 2024-09-25 05:40 UTC: The repository level ruleset is changed
-* **T2:** TODO: An organization level ruleset is created and the repository ruleset disabled
+* **T2:** 2024-09-25 08:37 UTC: An organization level ruleset is created and the repository ruleset disabled
 
 ## Rule enforcement
 

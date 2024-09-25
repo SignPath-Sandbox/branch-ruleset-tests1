@@ -42,4 +42,4 @@ jobs:
           signing-policy-slug:  '${{ env.name }}'
           github-artifact-id:  "${{steps.upload-unsigned-artifact.outputs.artifact-id}}"
           wait-for-completion: false
-          extended-verification-token: '${{ secrets.EXTENDED_VERIFICATON_TOKEN }}'
+          github-extended-verification-token: '${{ secrets.EXTENDED_VERIFICATON_TOKEN }}'

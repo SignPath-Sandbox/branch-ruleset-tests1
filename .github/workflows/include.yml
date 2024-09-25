@@ -29,6 +29,7 @@ jobs:
       - name: Submit Signing Request
         uses: signpath/github-action-submit-signing-request@v1
         with:
+          connector-url: 'https://githubactions-qa1.connectors.dev.signpath.io:15021'
           api-token: '${{ secrets.SIGNPATH_API_TOKEN }}'
           organization-id: '${{ vars.SIGNPATH_ORGANIZATION_ID }}'
           project-slug: 'GitHub_Branch_Ruleset_Tests'

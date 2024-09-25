@@ -1,4 +1,7 @@
-name: Build & Deploy PROD
+name: 01 - Continuity error
+
+# This signing policy evaluates that pull requests (including all flags) and a deletion restriction have been enabled since T0. 
+# As both were not set between T1 and T2, this workflow fails.
 
 on:
   push:

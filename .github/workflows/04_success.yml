@@ -1,7 +1,7 @@
 name: 04 - Success
 
 # This signing policy validates that non_fast_forward has been restricted since T1.
-# This is the case, so it should pass
+# This is the case, so it should pass again
 
 on:
   push:

@@ -15,7 +15,7 @@ on:
 jobs:
   build:
     runs-on:
-      group: linux-paid-runner
+      group: Paid
     permissions:
       actions: read
       contents: read

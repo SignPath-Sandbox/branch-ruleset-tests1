@@ -14,8 +14,7 @@ on:
           default: 'https://githubactions-qa1.connectors.dev.signpath.io:15021'
 jobs:
   build:
-    runs-on:
-      group: Paid
+    runs-on: ubuntu-latest
     permissions:
       actions: read
       contents: read

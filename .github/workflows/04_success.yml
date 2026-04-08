@@ -11,7 +11,7 @@ on:
         connector-url:
           required: true
           type: string
-          default: 'https://githubactions-qa1.connectors.dev.signpath.io:15021'
+          default: 'https://pipelineconnector-qa1.connectors.dev.signpath.io:15001/GitHubActions/GitHubCom'
 jobs:
   build:
     runs-on: ubuntu-latest

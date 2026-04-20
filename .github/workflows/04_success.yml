@@ -37,6 +37,7 @@ jobs:
           name: "upload-${{ env.name }}" 
           if-no-files-found: error
           path: random.dll
+          archive: true
       - name: Submit Signing Request
         uses: signpath/github-action-submit-signing-request@main
         with:

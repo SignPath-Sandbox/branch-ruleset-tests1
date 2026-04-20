@@ -19,7 +19,7 @@ jobs:
       actions: read
       contents: read
     env:
-      name: 04_success
+      name: 06_success_without_attestation
     steps:
       - name: Checkout
         uses: actions/checkout@v4

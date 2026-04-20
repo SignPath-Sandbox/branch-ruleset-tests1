@@ -1,0 +1,53 @@
+name: 04 - Success
+
+# This signing policy validates that non_fast_forward has been restricted since T1.
+# This is the case, so it should pass / this time not
+
+on:
+  push:
+    branches: ["main"]
+  workflow_dispatch:
+    inputs:
+        connector-url:
+          required: true
+          type: string
+          default: 'https://pipelineconnector-qa1.connectors.dev.signpath.io:15001/GitHubActions/GitHubCom'
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      actions: read
+      contents: read
+    env:
+      name: 04_success
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Print signing policy
+        run: echo "Running for signing policy $name"
+        shell: bash
+      - name: Download dummy executable
+        run: curl -o random.dll -L https://github.com/carterjones/hello-world-dll/releases/download/v1.0.0/hello-world-x64.dll
+      - name: upload-unsigned-artifact
+        id: upload-unsigned-artifact
+        uses: actions/upload-artifact@v7
+        with:
+          name: "upload-${{ env.name }}" 
+          if-no-files-found: error
+          path: random.dll
+          archive: false
+      - name: Submit Signing Request
+        uses: signpath/github-action-submit-signing-request@main
+        with:
+          connector-url: ${{ inputs.connector-url }}
+          # connector-url: https://pipelineconnector-qa1.connectors.dev.signpath.io:15001/GitHubActions/GitHubCom (pipeline connector)
+          api-token: '${{ secrets.SIGNPATH_API_TOKEN }}'
+          organization-id: '${{ vars.SIGNPATH_ORGANIZATION_ID }}'
+          project-slug: 'GitHub_Branch_Ruleset_Tests'
+          signing-policy-slug:  '06_success_dll_without_attestation'
+          artifact-configuration-slug:  'dll_only'
+          github-artifact-id:  "${{steps.upload-unsigned-artifact.outputs.artifact-id}}"
+          wait-for-completion: true
+          github-extended-verification-token: '${{ secrets.EXTENDED_VERIFICATON_TOKEN }}'
